@@ -5,6 +5,7 @@ python:
 install:
   - pip install coveralls
   - pip install git+https://github.com/ThousandMileEye/eye.git
+  - pip install --user travis-sphinx
 
 before_script:
   - eyed &
@@ -13,9 +14,11 @@ before_script:
 
 script:
   - coverage run setup.py test
+  - travis-sphinx --source=source_document docs
 
 after_success:
   - coverage html
+  - travis-sphinx deploy
 
 after_script:
   - kill $KINESALITE_PID
