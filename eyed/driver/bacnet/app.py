@@ -13,7 +13,7 @@ import sys
 class App(BIPSimpleApplication, ReadWritePropertyMultipleServices):
 	def __init__(self, *args):
 		#
-		# コンストラクタ
+		# スーパーコンストラクタ呼び出し
 		#
 		BIPSimpleApplication.__init__(self, *args)
 

@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import sys
+
+#
+# get logger
+#
+from eyed import logger
 
 #
 # BACnet Driver
@@ -89,18 +95,25 @@ def start_bacnet_emulation():
 			#
 			# オブジェクト の 登録
 			#
-			addBACnetObject(obj.name, obj.object_id, obj.instance_id)
+			if addBACnetObject(obj.name, obj.object_id, obj.instance_id) == False:
+				logger.debug('Failed to add BACnet object(name=%s, object_id=%d, instance_id=%d)' %(obj.name, obj.object_id, obj.instance_id))
 			for prop in obj.properties:
 				#
 				# プロパティの登録
 				#
-				addBACnetProperty(
-					obj.name,
-					prop.type,
-					obj.object_id,
-					obj.instance_id,
-					prop.property_id
-				)
+				if addBACnetProperty(obj.name, obj.object_id, obj.instance_id, prop.property_id) == False:
+					logger.debug('Failed to add BACnet property(name=%s, property_id=%d)' %(obj.name, prop.property_id))
+
+		#
+		# 正常終了
+		#
+		return True
+
+	#
+	# 例外確認要
+	#
+	assert sys.exc_info()[0] == None, sys.exc_info()
+	return False
 
 #
 # Entry Point

@@ -284,5 +284,7 @@ class BACnetClient:
 		#
 		# オブジェクトを名前から検索
 		#
+		#obj = self.application.get_object_name(name)
+		#print name, obj._properties.get('presentValue')
 		return self.application.get_object_name(name)
 

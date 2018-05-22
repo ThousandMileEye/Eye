@@ -40,7 +40,6 @@ class BACnetService(object):
 		app = SingleBACnetd.getApplication()
 		if app == None:
 			raise Exception('BAcnetd is not running...')
-
 		bacnet = BACnetClient(app)
 
 		#
@@ -175,9 +174,6 @@ class BACnetService(object):
 		#
 		# BACnet オブジェクトの検索
 		#
-		obj = bacnet.getObjectByName(name)
-		for prop in obj._properties:
-			print prop
 		return bacnet.getObjectByName(name)
 
 	#

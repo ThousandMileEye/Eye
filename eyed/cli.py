@@ -373,9 +373,7 @@ def show_simulation_bacnet(ctx):
 #########################################################################
 @show_simulation_bacnet.command(name = 'objects')
 @click.pass_context
-@click.argument('name')
-@click.argument('property_id')
-def show_simulation_bacnet_objects(ctx, name, property_id):
+def show_simulation_bacnet_objects(ctx):
 	#
 	# 引数の取得
 	#

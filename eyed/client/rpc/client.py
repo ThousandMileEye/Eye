@@ -243,9 +243,9 @@ if __name__ == '__main__':
 	#
 	client = BACnetRPCClient('127.0.0.1', 1413)
 	#print client.getPropertyLog('T0', 85)
-	client.getObjectByName('TEMP')
+	client.getObjectByName('H0')
 
-	client = SchedulerRPCClient('127.0.0.1', 1413)
+	#client = SchedulerRPCClient('127.0.0.1', 1413)
 	#client.addTaskGroup('TEST1', 60)
 	#print client.getBACnetTasks('BACNET')
 	#print client.getBACnetMeasuredValues(1)

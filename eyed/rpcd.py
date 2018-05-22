@@ -59,5 +59,9 @@ def start(port = 1413):
 # Entry Point
 #
 if __name__ == "__main__":
+	import logging
+	from eyed import logger
+	logger.addHandler(logging.StreamHandler())
+	logging.basicConfig(level=logging.DEBUG)
 	start()
 
