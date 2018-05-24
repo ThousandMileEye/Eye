@@ -11,7 +11,7 @@ from apscheduler.schedulers.base import STATE_RUNNING
 #
 # Database 接続用
 #
-from eyed.model import TaskGroup, BACnetMeasurementLog, BACnetMeasuredValue
+from eyed.model import TaskGroup, BACnetMeasuredValue
 from eyed.db import SessionFactory
 
 #
@@ -123,17 +123,6 @@ class SingleScheduler:
 					# 値の保存
 					#
 					task.measuredValues.append(BACnetMeasuredValue(value))
-
-					#
-					# 値の保存
-					#
-					session.add(BACnetMeasurementLog(
-						task.device_id,
-						task.object_id,
-						task.instance_id,
-						task.property_id,
-					 	value
-					))
 					session.commit()
 
 		#

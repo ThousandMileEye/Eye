@@ -3,7 +3,7 @@
 from base import BaseObject
 from config import Config
 from simulation import BACnetSimulationObject, BACnetSimulationProperty
-from log import BACnetSimulationLog, BACnetMeasurementLog
+from log import BACnetSimulationLog
 from proxy import ProxyPoint
 from scheduler import TaskGroup, BACnetTask, BACnetMeasuredValue
 
@@ -13,7 +13,6 @@ __all__ = [
 	BACnetSimulationObject,
 	BACnetSimulationProperty,
 	BACnetSimulationLog,
-	BACnetMeasurementLog,
 	ProxyPoint,
 	TaskGroup,
 	BACnetTask,
