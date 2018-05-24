@@ -233,7 +233,10 @@ class BACnetService(object):
 		#
 		# BACnet オブジェクトの検索
 		#
-		return bacnet.getObjectByName(name)
+		property = definition.findPropertyByID(property_id)
+		if property == None:
+			return None
+		return bacnet.getProperty(name, property['name'])
 
 	#
 	# プロパティの設定

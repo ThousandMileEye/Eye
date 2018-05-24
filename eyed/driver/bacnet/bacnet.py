@@ -240,6 +240,13 @@ class BACnetClient:
 		return True
 
 	#
+	# getProperty (プロパティ の 登録)
+	#
+	def getProperty(self, name, property_name):
+		obj = self.getObjectByName(name)
+		return obj._properties.get(property_name)
+
+	#
 	# getObjectByID (オブジェクト の 取得)
 	#
 	def getObjectIdentifier(self, object_id, instance_id):
@@ -284,7 +291,5 @@ class BACnetClient:
 		#
 		# オブジェクトを名前から検索
 		#
-		#obj = self.application.get_object_name(name)
-		#print name, obj._properties.get('presentValue')
 		return self.application.get_object_name(name)
 
