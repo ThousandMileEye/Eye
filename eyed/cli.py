@@ -186,14 +186,45 @@ def set_simulation(ctx):
 def set_simulation_bacnet(ctx):
 	pass
 
+#########################################################################
+# プロペティ種別 の 設定
+#########################################################################
+@set_simulation_bacnet.command(name = 'property')
+@click.pass_context
+@click.argument('name')
+@click.argument('property_id')
+@click.argument('type', type = click.Choice(['STATIC', 'MEASUREMENT']))
+@click.argument('value')
+def set_simulation_bacnet_property(ctx, name, property_id, type, value):
+	#
+	# 引数の取得
+	#
+	host = ctx.obj['host']
+	port = ctx.obj['port']
+
+	#
+	# Eyed に RPC接続
+	#
+	client = BACnetRPCClient(host, port)
+
+	#
+	# オブジェクトの登録
+	#
+	click.echo(client.setPropertyType(
+		name,
+		int(property_id),
+		type,
+		value
+	))
+
+#########################################################################
+# 静的パラメータ の 設定
+#########################################################################
 @set_simulation_bacnet.group(name = 'static')
 @click.pass_context
 def set_simulation_bacnet_static(ctx):
 	pass
 
-#########################################################################
-# 静的パラメータ の 設定
-#########################################################################
 @set_simulation_bacnet_static.command(name = 'property')
 @click.pass_context
 @click.argument('name')

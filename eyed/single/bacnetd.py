@@ -23,7 +23,7 @@ class Datastore:
 	#
 	# BACnet プロトコル用の識別子作成
 	#
-	def __generateBACnetKey(self, cls, object_id, instance_id, property_id):
+	def getBACnetKey(self, cls, object_id, instance_id, property_id):
 		#
 		# 鍵の作成
 		#
@@ -36,7 +36,7 @@ class Datastore:
 		#
 		# 鍵を生成しハッシュマップに登録
 		#
-		key = self.__generateBACnetKey(
+		key = self.getBACnetKey(
 			cls,
 			object_id,
 			instance_id,
@@ -55,7 +55,7 @@ class Datastore:
 		#
 		# ハッシュマップ内から鍵を検索
 		#
-		key = self.__generateBACnetKey(
+		key = self.getBACnetKey(
 			cls,
 			object_id,
 			instance_id,
@@ -74,7 +74,6 @@ class Datastore:
 #
 class DatastoreType:
 	STATIC		= 'STATIC'
-	PROXY		= 'PROXY'
 	MEASUREMENT	= 'MEASUREMENT'
 
 #

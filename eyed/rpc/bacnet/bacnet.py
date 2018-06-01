@@ -284,11 +284,49 @@ class BACnetService(object):
 	#
 	# プロパティ種別 の 設定
 	#
-	def exposed_setPropertyType(self, name, property_id, value):
+	def exposed_setPropertyType(self, name, property_id, type, value):
+		#
+		# BACnet コマンド操作用インスタンス取得
+		#
+		app = SingleBACnetd.getApplication()
+		if app == None:
+			raise Exception('BAcnetd is not woring...')
+		bacnet = BACnetClient(app)
+
 		#
 		# DB への 接続
 		#
 		with SessionFactory() as session:
+			#
+			# オブジェクト名が登録されているかを確認
+			#
+			obj = session.query(BACnetSimulationObject).filter_by(name = name).first()
+			if obj == None: return False
+
+			#
+			# プロパティ名が登録されているかを確認
+			#
+			prop = obj.properties.filter_by(property_id = property_id).first()
+			if prop == None: return False
+
+			#
+			# BACnet オブジェクトの検索
+			#
+			property = definition.findPropertyByID(property_id)
+			if property == None:
+				return None
+			property = bacnet.getProperty(name, property['name'])
+			if property == None:
+				return None
+
+			#
+			# プロパティ種別の設定
+			#
+			property.setType(type, value)
+
+			#
+			# プロパティの取得
+			#
 			return True
 
 		#

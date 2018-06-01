@@ -186,6 +186,16 @@ class BACnetRPCClient(RPCClient):
 		return bacnet.setProperty(name, property_id, value)
 
 	#
+	# setPropertyType
+	#
+	def setPropertyType(self, name, property_id, type, value):
+		#
+		# ポイントの登録
+		#
+		bacnet = self.root.BACnetService()
+		return bacnet.setPropertyType(name, property_id, type, value)
+
+	#
 	# getProperty
 	#
 	def getProperty(self, name, property_id):

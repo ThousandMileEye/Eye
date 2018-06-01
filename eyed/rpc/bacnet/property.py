@@ -9,7 +9,7 @@ from eyed.single import SingleBACnetd, DatastoreType
 #
 # Database 接続用
 #
-from eyed.model import BACnetSimulationLog
+from eyed.model import BACnetSimulationLog, BACnetMeasuredValue
 from eyed.db import SessionFactory
 
 #
@@ -44,14 +44,7 @@ class EyedPresentValue(Property):
 		#
 		# 初期値のセットアップ
 		#
-		datastore = SingleBACnetd().getDatastore()
-		datastore.setBACnetValue(
-			DatastoreType.STATIC,
-			self.object_id,
-			self.instance_id,
-			self.property_id,
-			default_value
-		)
+		self.setType(type, default_value)
 
 	#
 	# 読み込み
@@ -100,6 +93,33 @@ class EyedPresentValue(Property):
 	#
 	# プロパティ種別の変更
 	#
-	def setType(self, type):
+	def setType(self, type, value):
+		#
+		# プロパティ種別の設定
+		#
 		self.type = type
+
+		#
+		# プロパティ種別が「STATIC」の場合
+		#
+		if type == DatastoreType.STATIC:
+			datastore = SingleBACnetd().getDatastore()
+			datastore.setBACnetValue(
+				DatastoreType.STATIC,
+				self.object_id,
+				self.instance_id,
+				self.property_id,
+				value
+			)
+		#
+		# プロパティ種別が「MEASUREMENT」の場合
+		#
+		else:
+			#
+			# DB への 接続
+			#
+			with SessionFactory() as session:
+				print session.query(BACnetMeasuredValue).filter_by().first()
+			return True
+		return False
 
