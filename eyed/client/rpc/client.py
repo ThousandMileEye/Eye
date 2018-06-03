@@ -168,12 +168,12 @@ class BACnetRPCClient(RPCClient):
 	#
 	# setProperty
 	#
-	def addProperty(self, name, property_id):
+	def addProperty(self, name, property_id, value):
 		#
 		# プロパティの登録
 		#
 		bacnet = self.root.BACnetService()
-		return bacnet.addProperty(name, property_id)
+		return bacnet.addProperty(name, property_id, value)
 
 	#
 	# setProperty
@@ -263,6 +263,7 @@ if __name__ == '__main__':
 	#
 	client = BACnetRPCClient('127.0.0.1', 1413)
 	prop = client.getProperty('H0', 85)
+
 	print prop
 	help(prop)
 

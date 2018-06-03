@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import sys
 
 #
 # Job Scheduler
@@ -22,7 +23,7 @@ from eyed.driver.bacnet import BACnetClient
 #
 # Single Instances
 #
-from eyed.single import SingleBACnetd
+from eyed.single import SingleBACnetd, DatastoreType
 
 #
 # SingleScheduler
@@ -109,7 +110,7 @@ class SingleScheduler:
 					)
 
 					#
-					# 初期値のセットアップ
+					# 計測値のセットアップ
 					#
 					datastore.setBACnetValue(
 						DatastoreType.MEASUREMENT,
@@ -124,6 +125,12 @@ class SingleScheduler:
 					#
 					task.measuredValues.append(BACnetMeasuredValue(value))
 					session.commit()
+
+			#
+			# 例外の検知
+			#
+			assert sys.exc_info()[0] == None, sys.exc_info()
+			return False
 
 		#
 		# 定期実行ジョブの追加

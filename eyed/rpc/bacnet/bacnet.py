@@ -179,7 +179,7 @@ class BACnetService(object):
 	#
 	# プロパティの追加
 	#
-	def exposed_addProperty(self, name, property_id, type = DatastoreType.STATIC):
+	def exposed_addProperty(self, name, property_id, value, type = DatastoreType.STATIC):
 		#
 		# BACnet コマンド操作用インスタンス取得
 		#
@@ -212,7 +212,7 @@ class BACnetService(object):
 			#
 			# プロパティの登録(DB)
 			#
-			obj.properties.append(BACnetSimulationProperty(type, property_id))
+			obj.properties.append(BACnetSimulationProperty(type, property_id, value))
 			session.commit()
 			return True
 		assert sys.exc_info()[0] == None, sys.exc_info()
@@ -322,7 +322,8 @@ class BACnetService(object):
 			#
 			# プロパティ種別の設定
 			#
-			property.setType(type, value)
+			if property.setType(type, value) == False:
+				return False
 
 			#
 			# プロパティの取得

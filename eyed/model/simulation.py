@@ -69,6 +69,7 @@ class BACnetSimulationProperty(BaseObject):
 	id		= Column('ID', Integer, primary_key=True)
 	type		= Column('TYPE', String)
 	property_id	= Column('PROPERTY_ID', Integer)
+	value		= Column('VALUE', String)
 
 	#
 	# 外部キー
@@ -78,9 +79,10 @@ class BACnetSimulationProperty(BaseObject):
 	#
 	# コンストラクタ
 	#
-	def __init__(self, type, property_id):
+	def __init__(self, type, property_id, value):
 		self.type = type
 		self.property_id = property_id
+		self.value = value
 
 	#
 	# 文字列化
@@ -96,5 +98,6 @@ class BACnetSimulationProperty(BaseObject):
 			'id'		: self.id,
 			'type'		: self.type,
 			'property_id'	: self.property_id,
+			'value'		: self.value
 		}
 

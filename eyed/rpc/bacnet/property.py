@@ -9,7 +9,7 @@ from eyed.single import SingleBACnetd, DatastoreType
 #
 # Database 接続用
 #
-from eyed.model import BACnetSimulationLog, BACnetMeasuredValue
+from eyed.model import BACnetSimulationLog, BACnetMeasuredValue, BACnetTask
 from eyed.db import SessionFactory
 
 #
@@ -23,6 +23,7 @@ class EyedPresentValue(Property):
 		#
 		# 各識別子の定義
 		#
+		self.key		= None
 		self.type		= type
 		self.object_id		= object_id
 		self.instance_id	= instance_id
@@ -60,12 +61,7 @@ class EyedPresentValue(Property):
 		# キャッシュに値があれば、キャシュの値を返す
 		#
 		datastore = SingleBACnetd().getDatastore()
-		value = datastore.getBACnetValue(
-			self.type,
-			self.object_id,
-			self.instance_id,
-			self.property_id
-		)
+		value = datastore.getValue(self.key)
 
 		#
 		# DB への 接続
@@ -98,12 +94,25 @@ class EyedPresentValue(Property):
 		# プロパティ種別の設定
 		#
 		self.type = type
+		datastore = SingleBACnetd().getDatastore()
 
 		#
 		# プロパティ種別が「STATIC」の場合
 		#
 		if type == DatastoreType.STATIC:
-			datastore = SingleBACnetd().getDatastore()
+			#
+			# 鍵の取得
+			#
+			self.key = datastore.getBACnetKey(
+				DatastoreType.STATIC,
+				self.object_id,
+				self.instance_id,
+				self.property_id,
+			)
+
+			#
+			# 初期値の設定
+			#
 			datastore.setBACnetValue(
 				DatastoreType.STATIC,
 				self.object_id,
@@ -111,6 +120,7 @@ class EyedPresentValue(Property):
 				self.property_id,
 				value
 			)
+			return True
 		#
 		# プロパティ種別が「MEASUREMENT」の場合
 		#
@@ -119,7 +129,20 @@ class EyedPresentValue(Property):
 			# DB への 接続
 			#
 			with SessionFactory() as session:
-				print session.query(BACnetMeasuredValue).filter_by().first()
+				#
+				# タスクの確認
+				#
+				task = session.query(BACnetTask).filter_by(id = value).first()
+
+				#
+				# 鍵の取得
+				#
+				self.key = datastore.getBACnetKey(
+					DatastoreType.MEASUREMENT,
+					task.object_id,
+					task.instance_id,
+					task.property_id,
+				)
 			return True
 		return False
 

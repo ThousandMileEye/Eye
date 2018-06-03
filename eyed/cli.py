@@ -142,7 +142,8 @@ def add_simulation_bacnet_object(ctx, name, object_id, instance_id):
 @click.pass_context
 @click.argument('name')
 @click.argument('property_id')
-def add_simulation_bacnet_property(ctx, name, property_id):
+@click.argument('value', default = 0)
+def add_simulation_bacnet_property(ctx, name, property_id, value):
 	#
 	# 引数の取得
 	#
@@ -159,7 +160,8 @@ def add_simulation_bacnet_property(ctx, name, property_id):
 	#
 	click.echo(client.addProperty(
 		name,
-		int(property_id)
+		int(property_id),
+		value
 	))
 
 #########################################################################

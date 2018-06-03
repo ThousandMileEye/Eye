@@ -49,6 +49,17 @@ class Datastore:
 		self.hashmap[key] = value
 
 	#
+	# 値の取得
+	#
+	def getValue(self, key):
+		#
+		# 識別子の存在確認
+		#
+		if not key in self.hashmap:
+			return None
+		return self.hashmap[key]
+
+	#
 	# 値の検索
 	#
 	def getBACnetValue(self, cls, object_id, instance_id, property_id):
