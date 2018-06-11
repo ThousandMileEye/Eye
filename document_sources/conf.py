@@ -39,7 +39,15 @@ release = u'v0.4.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+	'sphinxtogithub'
 ]
+
+#
+# Github Page's setting
+#
+sphinx_to_github = True
+sphinx_to_github_verbose = True
+sphinx_to_github_encoding = 'utf-8'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
