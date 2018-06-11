@@ -153,6 +153,29 @@ $ eye set simulation bacnet property [NAME] [PROPERTY_ID] [VALUE]
 $ eye show simulation bacnet log [NAME] [PROPERTY_ID]
 ```
 
-## BACnet プロキシ の 利用
+## BACnet 計測機能の利用
+  BACnet 計測機能は定期的に設定を行った値のポーリング処理を行い、
+データを内部のデータベースに保存します。
 
+### タスクグループの作成　
+　計測機能を利用するためには、まずタスクグループの作成を行います。
+タスクグループの中に、データの取得頻度が等しいタスクを追加して行くことで計測を行います。
+
+```bash
+$ eye add measurement taskgroup [TASK NAME] [INTERVAL]
+```
+
+### タスクグループにタスクを追加する
+  作成したタスクグループにタスクを追加することで、計測処理を開始することが可能です。
+```bash
+eye add measurement task bacnet [NAME] [DEVICE_ID] [OBJECT_ID] [INSTANCE_ID] [PROPERTY_ID]
+```
+
+## BACnet プロキシ の 利用
+  BACnet プロキシ機能は、計測機能とシミュレータ機能を使用します。
+計測機能で収集したデータをシミュレータの監視ポイントとして振る舞わせることが可能です。
+
+```bash
+eye set simulation bacnet property [BACnetオブジェクト名] [プロパティ番号] MEASUREMENT [TASK_ID]
+```
 
