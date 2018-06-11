@@ -208,7 +208,7 @@ class BACnetService(object):
 			#
 			# プロパティの登録
 			#
-			if addBACnetProperty(obj.name, obj.object_id, obj.instance_id, property_id) == False:
+			if addBACnetProperty(obj.name, obj.object_id, obj.instance_id, property_id, type, value) == False:
 				return False
 
 			#
