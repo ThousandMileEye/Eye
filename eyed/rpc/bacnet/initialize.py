@@ -48,7 +48,7 @@ def addBACnetObject(name, object_id, instance_id):
 #
 # プロパティ の 登録
 #
-def addBACnetProperty(name, object_id, instance_id, property_id):
+def addBACnetProperty(name, object_id, instance_id, property_id, type, value):
 	#
 	# プロパティオブジェクトの定義
 	#
@@ -71,6 +71,8 @@ def addBACnetProperty(name, object_id, instance_id, property_id):
 	if not property_id in propertyObjects:
 		return False
 	prop = propertyObjects[property_id](object_id, instance_id)
+	print prop, type, value
+	#prop.setType(type, value)
 
 	#
 	# プロパティ の 登録
@@ -101,7 +103,7 @@ def start_bacnet_emulation():
 				#
 				# プロパティの登録
 				#
-				if addBACnetProperty(obj.name, obj.object_id, obj.instance_id, prop.property_id) == False:
+				if addBACnetProperty(obj.name, obj.object_id, obj.instance_id, prop.property_id, prop.type, prop.value) == False:
 					logger.debug('Failed to add BACnet property(name=%s, property_id=%d)' %(obj.name, prop.property_id))
 
 		#

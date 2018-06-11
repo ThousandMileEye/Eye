@@ -161,7 +161,7 @@ def add_simulation_bacnet_property(ctx, name, property_id, value):
 	click.echo(client.addProperty(
 		name,
 		int(property_id),
-		value
+		float(value)
 	))
 
 #########################################################################

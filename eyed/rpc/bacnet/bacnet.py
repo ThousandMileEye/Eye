@@ -4,6 +4,8 @@ import sys
 from bacpypes.object import AnalogValueObject
 from bacpypes.object import AnalogInputObject
 
+from sqlalchemy import update
+
 #
 # BACnet Driver
 #
@@ -273,6 +275,16 @@ class BACnetService(object):
 				prop.property_id,
 				value
 			)
+
+			#
+			# プロパティ(DB)の更新
+			#
+			prop.value = value
+
+			#
+			# 変更処理のコミット
+			#
+			session.commit()
 			return True
 
 		#
@@ -326,8 +338,15 @@ class BACnetService(object):
 				return False
 
 			#
-			# プロパティの取得
+			# プロパティ(DB)の更新
 			#
+			prop.type = type
+			prop.value = value
+
+			#
+			# 変更処理のコミット
+			#
+			session.commit()
 			return True
 
 		#

@@ -26,7 +26,7 @@ class BACnetSimulationObject(BaseObject):
 	#
 	# リレーション
 	#
-	properties = relationship('BACnetSimulationProperty', lazy='dynamic', backref = 'object')
+	properties = relationship('BACnetSimulationProperty', lazy='dynamic', backref = 'object', cascade = 'save-update')
 
 	#
 	# コンストラクタ
