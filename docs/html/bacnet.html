@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="jp" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="jp" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CLI for BACnet Protocol &mdash; EYE v0.4.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Daemon Manager" href="daemon.html" />
+    <link rel="prev" title="Command Line Interface" href="cli.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EYE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CLI for BACnet Protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bacnet">BACnet サービスの管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#">サービスを起動する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#">サービスを停止する</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bacnet">BACnet による値の取得</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bacnet">同一ネットワーク内の BACnet デバイスを検索する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bacnet">BACnet デバイスを確認する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bacnet">BACnet デバイス の プロパティ一覧を確認する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bacnet">BACnet デバイス から プロパティの読み込みを実行する</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bacnet">BACnet シミュレータの利用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#">新規オブジェクトの登録</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#">新規プロパティを登録</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#">プロパティへの値の設定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#">シミュレータが応答したプロパティのログを確認する</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bacnet">BACnet 計測機能の利用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#">タスクグループの作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#">タスクグループにタスクを追加する</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bacnet">BACnet プロキシ の 利用</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="daemon.html">Daemon Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Coding with Python via RPC &amp; API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EYE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>CLI for BACnet Protocol</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/bacnet.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cli-for-bacnet-protocol">
+<span id="cli-for-bacnet-protocol"></span><h1>CLI for BACnet Protocol<a class="headerlink" href="#cli-for-bacnet-protocol" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bacnet">
+<span id="bacnet"></span><h2>BACnet サービスの管理<a class="headerlink" href="#bacnet" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="">
+<span id="id1"></span><h3>サービスを起動する<a class="headerlink" href="#" title="Permalink to this headline">¶</a></h3>
+<p>BACnet サービスを利用するためには、まず BACnet サービスへの設定を実行する必要があります。
+BACnet サービスは以下のコマンドを使用することで利用することが可能となります。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye start bacnetd <span class="o">[</span>INTERFACE<span class="o">]</span> <span class="o">[</span>DEVICE_ID<span class="o">]</span>
+</pre></div>
+</div>
+<p>実際に使用する際には以下のように、インタフェース名を指定する必要があります。
+BACnet の デバイス ID は省略することが可能です。（同じネットワークに同じBACnet Device ID
+のBACnet デバイスが存在する際には変更を行う必要があります。）</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye start bacnetd eth0 <span class="m">1234</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="">
+<span id="id2"></span><h3>サービスを停止する<a class="headerlink" href="#" title="Permalink to this headline">¶</a></h3>
+<p>BACnet サービスを停止する際には、以下のコマンドを実行します。
+停止する場合には、BACnet を 使用した通信を行うことが出来なくなることに注意してください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye stop bacnetd
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="bacnet">
+<span id="id3"></span><h2>BACnet による値の取得<a class="headerlink" href="#bacnet" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bacnet">
+<span id="id4"></span><h3>同一ネットワーク内の BACnet デバイスを検索する<a class="headerlink" href="#bacnet" title="Permalink to this headline">¶</a></h3>
+<p>BACnet では、IP アドレスの代わりに デバイスID と呼ばれる識別子を利用することで、
+BACnet デバイス同士の通信が行われます。そのためBACnet の 通信を行うためには、
+まず BACnet デバイスを検索する必要があります。以下のコマンドを実行することで、
+BACnet デバイスの検索を実行することが可能です。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye show bacnet scan
+</pre></div>
+</div>
+</div>
+<div class="section" id="bacnet">
+<span id="id5"></span><h3>BACnet デバイスを確認する<a class="headerlink" href="#bacnet" title="Permalink to this headline">¶</a></h3>
+<p>BACnet デバイスのスキャンに成功すると、BACnet を使用したデバイスを確認することが、
+出来るようになります。デバイスリストは以下のように確認することができます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye show bacnet devices
+<span class="o">{</span><span class="s1">&#39;ip&#39;</span>: <span class="s1">&#39;192.168.218.8&#39;</span>, <span class="s1">&#39;device_id&#39;</span>: <span class="m">23200</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">&#39;ip&#39;</span>: <span class="s1">&#39;192.168.218.6&#39;</span>, <span class="s1">&#39;device_id&#39;</span>: <span class="m">200</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">&#39;ip&#39;</span>: <span class="s1">&#39;192.168.218.5&#39;</span>, <span class="s1">&#39;device_id&#39;</span>: <span class="m">5</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bacnet">
+<span id="id6"></span><h3>BACnet デバイス の プロパティ一覧を確認する<a class="headerlink" href="#bacnet" title="Permalink to this headline">¶</a></h3>
+<p>BACnet デバイスが保持しているプロパティ一覧や、オブジェクトリストといった基本情報を取得するためには、
+以下のコマンドを実行することで、基本的なパラメータを確認することが可能となります。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye run bacepics <span class="m">200</span>
+<span class="o">{</span>
+    <span class="s1">&#39;databaseRevision&#39;</span>: 7L,
+    <span class="s1">&#39;maxMaster&#39;</span>: 32L,
+    <span class="s1">&#39;numberOfApduRetries&#39;</span>: 3L,
+    <span class="s1">&#39;intervalOffset&#39;</span>: None,
+    <span class="s1">&#39;protocolServicesSupported&#39;</span>: <span class="o">[</span><span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span><span class="o">]</span>,
+    <span class="s1">&#39;timeOfDeviceRestart&#39;</span>: &lt;bacpypes.basetypes.TimeStamp object at 0x7f40001747d0&gt;,
+    <span class="s1">&#39;slaveAddressBinding&#39;</span>: None,
+    <span class="s1">&#39;slaveProxyEnable&#39;</span>: None,
+    <span class="s1">&#39;maxSegmentsAccepted&#39;</span>: 8L,
+    <span class="s1">&#39;restoreCompletionTime&#39;</span>: None,
+    <span class="s1">&#39;protocolVersion&#39;</span>: 1L,
+    <span class="s1">&#39;systemStatus&#39;</span>: <span class="s1">&#39;operational&#39;</span>,
+    <span class="s1">&#39;deviceAddressBinding&#39;</span>: <span class="o">[</span>
+        &lt;bacpypes.basetypes.AddressBinding object at 0x7f40000cc750&gt;,
+        &lt;bacpypes.basetypes.AddressBinding object at 0x7f3ff078bf90&gt;,
+        &lt;bacpypes.basetypes.AddressBinding object at 0x7f40000d4390&gt;,
+        &lt;bacpypes.basetypes.AddressBinding object at 0x7f3ff07b9a10&gt;
+    <span class="o">]</span>,
+    <span class="s1">&#39;modelName&#39;</span>: <span class="s1">&#39;### unknown encoding: 1 ###&#39;</span>,
+    <span class="s1">&#39;configurationFiles&#39;</span>: <span class="o">[]</span>,
+    <span class="s1">&#39;timeSynchronizationInterval&#39;</span>: None,
+    <span class="s1">&#39;utcTimeSynchronizationRecipients&#39;</span>: None,
+    <span class="s1">&#39;manualSlaveAddressBinding&#39;</span>: None,
+    <span class="s1">&#39;apduTimeout&#39;</span>: 6000L,
+    <span class="s1">&#39;backupFailureTimeout&#39;</span>: 0L,
+    <span class="s1">&#39;apduSegmentTimeout&#39;</span>: 6000L,
+    <span class="s1">&#39;segmentationSupported&#39;</span>: <span class="s1">&#39;segmentedBoth&#39;</span>,
+    <span class="s1">&#39;protocolObjectTypesSupported&#39;</span>: <span class="o">[</span><span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span><span class="o">]</span>,
+    <span class="s1">&#39;vendorIdentifier&#39;</span>: 279L,
+    <span class="s1">&#39;firmwareRevision&#39;</span>: <span class="s1">&#39;### unknown encoding: 1 ###&#39;</span>,
+    <span class="s1">&#39;objectList&#39;</span>: None,
+    <span class="s1">&#39;localDate&#39;</span>: <span class="o">(</span><span class="m">118</span>, <span class="m">4</span>, <span class="m">3</span>, <span class="m">2</span><span class="o">)</span>,
+    <span class="s1">&#39;vendorName&#39;</span>: <span class="s1">&#39;### unknown encoding: 1 ###&#39;</span>,
+    <span class="s1">&#39;lastRestoreTime&#39;</span>: &lt;bacpypes.basetypes.TimeStamp object at 0x7f4000087290&gt;,
+    <span class="s1">&#39;location&#39;</span>: <span class="s1">&#39;&#39;</span>,
+    <span class="s1">&#39;protocolRevision&#39;</span>: 0L,
+    <span class="s1">&#39;activeCovSubscriptions&#39;</span>: <span class="o">[]</span>,
+    <span class="s1">&#39;maxInfoFrames&#39;</span>: 1L,
+    <span class="s1">&#39;vtClassesSupported&#39;</span>: <span class="o">[]</span>,
+    <span class="s1">&#39;timeSynchronizationRecipients&#39;</span>: <span class="o">[]</span>,
+    <span class="s1">&#39;backupPreparationTime&#39;</span>: None,
+    <span class="s1">&#39;lastRestartReason&#39;</span>: <span class="s1">&#39;unknown&#39;</span>,
+    <span class="s1">&#39;backupAndRestoreState&#39;</span>: None,
+    <span class="s1">&#39;localTime&#39;</span>: <span class="o">(</span><span class="m">17</span>, <span class="m">28</span>, <span class="m">29</span>, <span class="m">30</span><span class="o">)</span>,
+    <span class="s1">&#39;structuredObjectList&#39;</span>: None,
+    <span class="s1">&#39;applicationSoftwareVersion&#39;</span>: <span class="s1">&#39;### unknown encoding: 1 ###&#39;</span>,
+    <span class="s1">&#39;serialNumber&#39;</span>: None,
+    <span class="s1">&#39;maxApduLengthAccepted&#39;</span>: 1024L,
+    <span class="s1">&#39;activeVtSessions&#39;</span>: <span class="o">[]</span>,
+    <span class="s1">&#39;restartNotificationRecipients&#39;</span>: <span class="o">[]</span>,
+    <span class="s1">&#39;utcOffset&#39;</span>: -540,
+    <span class="s1">&#39;restorePreparationTime&#39;</span>: None,
+    <span class="s1">&#39;daylightSavingsStatus&#39;</span>: False,
+    <span class="s1">&#39;autoSlaveDiscovery&#39;</span>: None,
+    <span class="s1">&#39;alignIntervals&#39;</span>: None
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bacnet">
+<span id="id7"></span><h3>BACnet デバイス から プロパティの読み込みを実行する<a class="headerlink" href="#bacnet" title="Permalink to this headline">¶</a></h3>
+<p>BACnet デバイスからプロパティの値を取得するためには、bacrpコマンドを使用します。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye run bacrp <span class="m">200</span> <span class="m">4</span> <span class="m">99</span> <span class="m">85</span>
+<span class="o">{</span><span class="s1">&#39;value&#39;</span>: <span class="s1">&#39;active&#39;</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="bacnet">
+<span id="id8"></span><h2>BACnet シミュレータの利用<a class="headerlink" href="#bacnet" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="">
+<span id="id9"></span><h3>新規オブジェクトの登録<a class="headerlink" href="#" title="Permalink to this headline">¶</a></h3>
+<p>BACnet Object を シミュレータに登録するには以下のコマンドを実行します。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye add simulation bacnet object <span class="o">[</span>NAME<span class="o">]</span> <span class="o">[</span>OBJECT_ID<span class="o">]</span> <span class="o">[</span>INSTANCE_ID<span class="o">]</span>
+</pre></div>
+</div>
+<p>BACnet オブジェクトが登録されているかを確認するためには、bacepics 等のコマンドを
+使用してください。</p>
+</div>
+<div class="section" id="">
+<span id="id10"></span><h3>新規プロパティを登録<a class="headerlink" href="#" title="Permalink to this headline">¶</a></h3>
+<p>作成したオブジェクトにプロパティを設定し、外部のデバイスから値を取得することが可能な
+状態にします。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye add simulation bacnet property <span class="o">[</span>NAME<span class="o">]</span> <span class="o">[</span>PROPERTY_ID<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="">
+<span id="id11"></span><h3>プロパティへの値の設定<a class="headerlink" href="#" title="Permalink to this headline">¶</a></h3>
+<p>作成したプロパティへの値を設定を行うためには、以下のコマンドを実行します。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye <span class="nb">set</span> simulation bacnet property <span class="o">[</span>NAME<span class="o">]</span> <span class="o">[</span>PROPERTY_ID<span class="o">]</span> <span class="o">[</span>VALUE<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="">
+<span id="id12"></span><h3>シミュレータが応答したプロパティのログを確認する<a class="headerlink" href="#" title="Permalink to this headline">¶</a></h3>
+<p>シミュレータ機能を利用して、他の BACnet デバイスからデータを取得した際の、
+ログを確認します。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye show simulation bacnet log <span class="o">[</span>NAME<span class="o">]</span> <span class="o">[</span>PROPERTY_ID<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="bacnet">
+<span id="id13"></span><h2>BACnet 計測機能の利用<a class="headerlink" href="#bacnet" title="Permalink to this headline">¶</a></h2>
+<p>BACnet 計測機能は定期的に設定を行った値のポーリング処理を行い、
+データを内部のデータベースに保存します。</p>
+<div class="section" id="">
+<span id="id14"></span><h3>タスクグループの作成<a class="headerlink" href="#" title="Permalink to this headline">¶</a></h3>
+<p>計測機能を利用するためには、まずタスクグループの作成を行います。
+タスクグループの中に、データの取得頻度が等しいタスクを追加して行くことで計測を行います。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ eye add measurement taskgroup <span class="o">[</span>TASK NAME<span class="o">]</span> <span class="o">[</span>INTERVAL<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="">
+<span id="id15"></span><h3>タスクグループにタスクを追加する<a class="headerlink" href="#" title="Permalink to this headline">¶</a></h3>
+<p>作成したタスクグループにタスクを追加することで、計測処理を開始することが可能です。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eye add measurement task bacnet <span class="o">[</span>NAME<span class="o">]</span> <span class="o">[</span>DEVICE_ID<span class="o">]</span> <span class="o">[</span>OBJECT_ID<span class="o">]</span> <span class="o">[</span>INSTANCE_ID<span class="o">]</span> <span class="o">[</span>PROPERTY_ID<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="bacnet">
+<span id="id16"></span><h2>BACnet プロキシ の 利用<a class="headerlink" href="#bacnet" title="Permalink to this headline">¶</a></h2>
+<p>BACnet プロキシ機能は、計測機能とシミュレータ機能を使用します。
+計測機能で収集したデータをシミュレータの監視ポイントとして振る舞わせることが可能です。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eye <span class="nb">set</span> simulation bacnet property <span class="o">[</span>BACnetオブジェクト名<span class="o">]</span> <span class="o">[</span>プロパティ番号<span class="o">]</span> MEASUREMENT <span class="o">[</span>TASK_ID<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="daemon.html" class="btn btn-neutral float-right" title="Daemon Manager" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cli.html" class="btn btn-neutral" title="Command Line Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Naoya Sawada.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.4.0',
+            LANGUAGE:'jp',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>
