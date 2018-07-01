@@ -68,11 +68,6 @@ alembic==0.9.9
 apscheduler==3.5.1
 
 #
-# Testcase Framework
-#
-coverage
-
-#
 # Documentation Tool
 #
 sphinx==1.7.2
