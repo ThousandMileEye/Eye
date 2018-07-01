@@ -11,9 +11,9 @@
 $ pip install git+https://github.com/ThousandMileEye/eye.git
 ```
 
-### 最新安定版のインストール (v0.4.0)
+### 最新安定版のインストール (v0.6.0)
 
 ```bash
-$ pip install git+https://github.com/ThousandMileEye/eye/archive/v0.4.0.zip
+$ pip install git+https://github.com/ThousandMileEye/eye/archive/v0.6.0.zip
 ```
 

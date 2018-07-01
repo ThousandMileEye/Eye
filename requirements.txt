@@ -75,3 +75,10 @@ sphinxtogithub==1.1.0
 sphinx_rtd_theme==0.3.0
 recommonmark==0.4.0
 
+#
+# Jupyter
+# Enable widget extension
+#
+jupyter
+#jupyter nbextension enable --py --sys-prefix widgetsnbextension
+
