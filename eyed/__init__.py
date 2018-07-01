@@ -7,6 +7,7 @@ import db
 import model
 import rpc
 import rpcd
+import httpd
 import client
 import driver
 
@@ -17,6 +18,7 @@ __all__ = [
 	driver,
 	rpc,
 	rpcd,
+	httpd,
 	client
 ]
 
