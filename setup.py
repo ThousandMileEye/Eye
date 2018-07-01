@@ -49,13 +49,14 @@ if __name__ == '__main__':
 		#
 		entry_points	= '''
 		[console_scripts]
-		eye	= eyed.cli:start_cli
-		eyed	= eyed.rpcd:start
+		eye		= eyed.cli:start_cli
+		eyed		= eyed.rpcd:start
+		eye_httpd	= eyed.httpd:start
 		''',
 
 		#
 		# Test Case
 		#
-		test_suite	= 'tests',
+		test_suite	= 'test_cases',
 	)
 

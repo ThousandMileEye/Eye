@@ -7,7 +7,7 @@ install:
   - pip install git+https://github.com/ThousandMileEye/eye.git
 
 before_script:
-  - eyed &
+  - eye_httpd &
   - KINESALITE_PID=$!
   - sleep 5
 
