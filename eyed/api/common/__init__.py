@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import v1
-import common
+import response
 
-__all__ = [v1, common]
+__all__ = [response]
 
