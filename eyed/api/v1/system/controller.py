@@ -3,6 +3,11 @@
 from pyramid.view import view_config, view_defaults
 
 #
+# パッケージ管理ツール
+#
+from pkg_resources import get_distribution
+
+#
 # Network Interface Card の 情報を取得
 #
 import netifaces
@@ -14,10 +19,18 @@ from netaddr import IPNetwork
 from eyed.api.common.response import OK
 
 #
+# システムのバージョン情報取得
+#
+@view_config(route_name='api::v1:system:version', renderer='json')
+def get_version(request):
+	version = get_distribution('eyed').version
+	return OK({ 'version' : version })
+
+#
 # NIC情報の取得用API
 #
 @view_config(route_name='api::v1:system:network_interfaces', renderer='json')
-def network_interfaces(request):
+def get_network_interfaces(request):
 	#
 	# NIC の 情報の取得
 	#

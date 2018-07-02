@@ -6,7 +6,7 @@ from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest, HTTPRequestTime
 #
 # リクエスト成功時の処理
 #
-def OK(value):
+def OK(value = None):
 	return HTTPOk(json_body = {
 		'ok' 	: True,
 		'data'	: value,
