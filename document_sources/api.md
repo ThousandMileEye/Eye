@@ -13,3 +13,12 @@ for interface in interfaces:
 	click.echo('%s %s' %(name, ipv4))
 ```
 
+# Restful API
+## システム関連
+### バージョンの取得
+#### /api/v1/system/version
+
+### NIC 情報の取得
+#### /api/v1/system/network_interfaces/
+
+
