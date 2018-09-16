@@ -5,6 +5,7 @@ logger = logging.getLogger(__name__)
 
 import db
 import model
+import boot
 import rpc
 import rpcd
 import httpd
@@ -16,6 +17,7 @@ __all__ = [
 	db,
 	model,
 	driver,
+	boot,
 	rpc,
 	rpcd,
 	httpd,

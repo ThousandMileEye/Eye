@@ -3,22 +3,7 @@
 import os, subprocess
 from pyramid.config import Configurator
 from waitress import serve
-
-#
-# Database の 最新化
-#
-def init():
-        #
-        # スクリプトを実行するディレクトリ設定
-        #
-        base_path = os.path.dirname(os.path.abspath(__file__))
-        os.chdir(base_path)
-
-        #
-        # DB を 最新のスキーマ へ アップデート
-        #
-        command = ['alembic upgrade head']
-        subprocess.check_call(command, shell=True)
+from eyed.boot import boot
 
 #
 # デーモンの起動
@@ -51,6 +36,6 @@ def start(host = '0.0.0.0', port = 2018):
 # Main
 #
 if __name__ == '__main__':
-	init()
+	boot.doAlembicUpgradeHead()
 	start()
 
