@@ -8,7 +8,7 @@ install:
 before_script:
   - eye_httpd &
   - KINESALITE_PID=$!
-  - sleep 10
+  - sleep 60
 
 script:
   - python setup.py test
