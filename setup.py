@@ -51,7 +51,7 @@ if __name__ == '__main__':
 		[console_scripts]
 		eye		= eyed.cli:start_cli
 		eyed		= eyed.rpcd:start
-		eye_httpd	= eyed.httpd:start
+		eye_httpd	= eyed.httpd:start_httpd
 		''',
 
 		#
