@@ -113,6 +113,19 @@ class SingleBACnetd:
 		return cls._instance
 
 	#
+	# BACnetd の 生存確認
+	#
+	@classmethod
+	def isAlive(cls):
+		#
+		# BACnetd が 起動しているかを確認
+		#
+		self = SingleBACnetd().getInstance()
+		if not self.bacnetd == None:
+			return True
+		return False
+
+	#
 	# get Application
 	#
 	@classmethod
