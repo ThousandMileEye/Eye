@@ -13,9 +13,9 @@ from rpyc.utils.server import ThreadedServer
 # Services
 #
 from eyed.rpc.system import SystemService
-from eyed.rpc.bacnet import BACnetService, start_bacnet_emulation
-from eyed.rpc.bacnetd import BACnetdService, start_bacnetd
-from eyed.rpc.scheduler import SchedulerService, start_scheduler
+from eyed.rpc.bacnet import BACnetService
+from eyed.rpc.bacnetd import BACnetdService
+from eyed.rpc.scheduler import SchedulerService
 from eyed.boot import boot
 
 #
@@ -32,13 +32,6 @@ class RPCService(rpyc.Service):
 #
 def start(port = 1413):
 	#
-	# 初期化処理
-	#
-	start_bacnetd(None, None)
-	start_bacnet_emulation()
-	start_scheduler()
-
-	#
 	# RPCサーバ の 起動
 	#
 	server = ThreadedServer(RPCService, port = port)
@@ -54,5 +47,6 @@ if __name__ == "__main__":
 	logging.basicConfig(level=logging.DEBUG)
 
 	boot.doAlembicUpgradeHead()
+	boot.start()
 	start()
 
