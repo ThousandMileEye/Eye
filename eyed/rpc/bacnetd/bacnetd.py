@@ -13,8 +13,8 @@ class BACnetdService(object):
 	#
 	# BACnetd サービスの起動
 	#
-	def exposed_start(self, interface, device_id):
-		return SingleBACnetd.start(interface, device_id)
+	def exposed_start(self, interface_name, device_id):
+		return SingleBACnetd.start(interface_name, device_id)
 
 	#
 	# BACnetd の 状態確認
