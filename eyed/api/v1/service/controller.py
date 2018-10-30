@@ -60,7 +60,7 @@ class BACnetdController:
 			# 追加の引数を許可しない
 			#
 			'additionalProperties'	: False,
-			'required'		: ['name', 'device_id'],
+			'required'		: ['interface_name', 'device_id'],
 		}
 
 		#
