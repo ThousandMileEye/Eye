@@ -14,7 +14,7 @@ class Service(unittest.TestCase):
 			'START',
 			'%s/api/v1/service/bacnetd/' %(url),
 			json = {
-				'interface_name'	: 'lo0',
+				'interface_name'	: 'eth0',
 				'device_id'		: 2018
 			}
 		)
