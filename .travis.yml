@@ -9,6 +9,7 @@ before_script:
   - eye_httpd &
   - KINESALITE_PID=$!
   - sleep 60
+  - ifconfig
 
 script:
   - python setup.py test
