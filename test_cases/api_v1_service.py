@@ -23,5 +23,6 @@ class Service(unittest.TestCase):
 
 	def test_stop_bacnetd(self):
 		response = requests.request('STOP', '%s/api/v1/service/bacnetd/' %(url))
+		print(response.content)
 		self.assertEqual(response.status_code, 200)
 
