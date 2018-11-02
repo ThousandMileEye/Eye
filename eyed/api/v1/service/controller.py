@@ -40,8 +40,8 @@ class BACnetdController:
 	#
 	# BACnetd の 操作
 	#
-	@view_config(request_method = 'START')
-	def start(self):
+	@view_config(request_method = 'POST')
+	def post(self):
 		#
 		# JSON の 書式定義
 		#
@@ -101,8 +101,8 @@ class BACnetdController:
 	#
 	# BACnetd の 停止
 	#
-	@view_config(request_method = 'STOP')
-	def stop(self):
+	@view_config(request_method = 'DELETE')
+	def delete(self):
 		#
 		# BACnetd の 起動状態確認
 		#
