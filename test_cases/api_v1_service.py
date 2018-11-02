@@ -18,6 +18,7 @@ class Service(unittest.TestCase):
 				'device_id'		: 2018
 			}
 		)
+		print(response.content)
 		self.assertEqual(response.status_code, 200)
 
 	def test_stop_bacnetd(self):
