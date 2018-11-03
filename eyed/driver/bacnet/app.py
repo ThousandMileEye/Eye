@@ -20,19 +20,19 @@ class App(BIPSimpleApplication, ReadWritePropertyMultipleServices):
 		#
 		# BACnet デバイスキャッシュ用
 		#
-		self.device_map = {}
+		self._device_map = {}
 
 		#
 		# IAmRequest を 受けたデバイスIDを管理するキュー
 		#
-		self.responseQueue = Queue()
+		self._device_queue = Queue()
 
 	#
 	# デバイスマップ、レスポンスキューのクリア
 	#
 	def clear(self):
-		#self.device_map = {}
-		self.responseQueue = Queue()
+		#self._device_map = {}
+		self._device_queue = Queue()
 
 	#
 	# リクエスト の 送信
@@ -63,15 +63,22 @@ class App(BIPSimpleApplication, ReadWritePropertyMultipleServices):
 			#
 			# デバイスID と IPアドレスのマッピング管理
 			#
-			self.device_map[device_instance] = ipaddr
+			self._device_map[device_instance] = ipaddr
 
 			#
 			# IAmRequest を 取得したことを通知する
 			#
-			self.responseQueue.put(device_instance)
+			self._device_queue.put(device_instance)
 
 		#
 		# forward it along
 		#
 		BIPSimpleApplication.indication(self, apdu)
+
+	#
+	# Device の 取得
+	#
+	def getDevice(self, timeout):
+		device_id = app._device_queue.get(timeout = timeout)
+		return { 'device_id' : device_id }
 
