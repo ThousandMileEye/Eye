@@ -33,8 +33,9 @@ class BACnetClient:
 		#
 		# デバイスマップの返却
 		#
-		if device_id in self.application.device_map:
-			return self.application.device_map[device_id]
+		device_map = self.application.getDeviceMap()
+		if device_id in device_map:
+			return device_map[device_id]
 		return None
 
 	#
