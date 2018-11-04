@@ -23,7 +23,7 @@ from eyed.driver.bacnet import BACnetClient
 #
 # Single Instances
 #
-from eyed.single import SingleBACnetd, DatastoreType
+from eyed.single import SingleBACnetdService, DatastoreType
 
 #
 # SingleScheduler
@@ -86,14 +86,14 @@ class SingleScheduler:
 				#
 				# BACnet コマンド操作用インスタンス取得
 				#
-				app = SingleBACnetd.getApplication()
+				app = SingleBACnetdService.getApplication()
 				if app == None: return
 				bacnet = BACnetClient(app)
 
 				#
 				# Data Store の 取得
 				#
-				datastore = SingleBACnetd().getDatastore()
+				datastore = SingleBACnetdService().getDatastore()
 
 				#
 				# タスクの取得

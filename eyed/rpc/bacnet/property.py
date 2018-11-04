@@ -4,7 +4,7 @@ from bacpypes.primitivedata import Real
 from bacpypes.object import Property
 from bacpypes.errors import ExecutionError
 
-from eyed.single import SingleBACnetd, DatastoreType
+from eyed.single import SingleBACnetdService, DatastoreType
 
 #
 # Database 接続用
@@ -60,7 +60,7 @@ class EyedPresentValue(Property):
 		#
 		# キャッシュに値があれば、キャシュの値を返す
 		#
-		datastore = SingleBACnetd().getDatastore()
+		datastore = SingleBACnetdService().getDatastore()
 		value = datastore.getValue(self.key)
 
 		#
@@ -94,7 +94,7 @@ class EyedPresentValue(Property):
 		# プロパティ種別の設定
 		#
 		self.type = type
-		datastore = SingleBACnetd().getDatastore()
+		datastore = SingleBACnetdService().getDatastore()
 
 		#
 		# プロパティ種別が「STATIC」の場合

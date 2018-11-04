@@ -15,6 +15,6 @@ class System(unittest.TestCase):
 
 	def test_get_network_interfaces(self):
 		response = requests.get('%s/api/v1/system/network_interfaces/' %(url))
-		print(response.content)
+		#print(response.content)
 		self.assertEqual(response.status_code, 200)
 

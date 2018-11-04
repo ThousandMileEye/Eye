@@ -26,7 +26,7 @@ from eyed.db import SessionFactory
 #
 # Singletone BACnetd
 #
-class SingleBACnetd:
+class SingleBACnetdService:
 	#
 	# インスタンス保持用変数
 	#
@@ -56,7 +56,7 @@ class SingleBACnetd:
 		#
 		# BACnet Daemon が 起動しているか確認
 		#
-		single = SingleBACnetd.getInstance()
+		single = SingleBACnetdService.getInstance()
 		if not single.bacnetd == None:
 			return False
 
@@ -136,7 +136,7 @@ class SingleBACnetd:
 		#
 		# BACnetd が 起動しているかを確認
 		#
-		self = SingleBACnetd.getInstance()
+		self = SingleBACnetdService.getInstance()
 		if not self.bacnetd == None:
 			return True
 		return False
@@ -149,13 +149,13 @@ class SingleBACnetd:
 		#
 		# サービスが起動していることを確認
 		#
-		if SingleBACnetd.isAlive() == False:
+		if SingleBACnetdService.isAlive() == False:
 			return False
 
 		#
 		# BACnetd の 停止
 		#
-		single = SingleBACnetd.getInstance()
+		single = SingleBACnetdService.getInstance()
 		single.bacnetd.stop()
 		single.bacnetd = None
 		return True
@@ -168,7 +168,7 @@ class SingleBACnetd:
 		#
 		# BACnetd が 起動しているかを確認
 		#
-		self = SingleBACnetd.getInstance()
+		self = SingleBACnetdService.getInstance()
 		if self.bacnetd == None:
 			return None
 
@@ -185,7 +185,7 @@ class SingleBACnetd:
 		#
 		# Datastore の 返却
 		#
-		self = SingleBACnetd.getInstance()
+		self = SingleBACnetdService.getInstance()
 		return self.datastore
 
 #

@@ -4,7 +4,7 @@
 #
 # BACnet デーモン管理用
 #
-from eyed.single import SingleBACnetd
+from eyed.single import SingleBACnetdService
 
 #
 # BACnetdService
@@ -14,17 +14,17 @@ class BACnetdService(object):
 	# BACnetd サービスの起動
 	#
 	def exposed_start(self, interface_name, device_id):
-		return SingleBACnetd.start(interface_name, device_id)
+		return SingleBACnetdService.start(interface_name, device_id)
 
 	#
 	# BACnetd の 状態確認
 	#
 	def exposed_getStatus(self):
-		return SingleBACnetd.isAlive()
+		return SingleBACnetdService.isAlive()
 
 	#
 	# BACnetd サービスの停止
 	#
 	def exposed_stop(self):
-		return SingleBACnetd.stop()
+		return SingleBACnetdService.stop()
 

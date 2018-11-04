@@ -8,7 +8,7 @@ import subprocess
 #
 from eyed.rpc.system import SystemService
 from eyed.rpc.bacnet import BACnetService, start_bacnet_emulation
-from eyed.single import SingleBACnetd
+from eyed.single import SingleBACnetdService
 from eyed.rpc.scheduler import SchedulerService, start_scheduler
 
 #
@@ -34,7 +34,7 @@ def start():
 	#
 	# 初期化処理
 	#
-	SingleBACnetd.start(None, None)
+	SingleBACnetdService.start(None, None)
 	start_bacnet_emulation()
 	start_scheduler()
 

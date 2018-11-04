@@ -2,5 +2,7 @@
 # -*- coding: utf-8 -*-
 import response
 
-__all__ = [response]
+__all__ = [
+	response
+]
 

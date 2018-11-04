@@ -4,7 +4,7 @@ import sys, os
 pardir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(pardir)
 
-from driver.bacnet import definition
+from eyed.driver.bacnet import definition
 from client import Client
 import requests
 
@@ -15,24 +15,24 @@ class BACnetdClient(Client):
 	#
 	# BACnet Daemon 起動
 	#
-	def start(self, interface):
+	def start(self, interface_name, device_id = 2018):
 		#
 		# URLの組立
 		#
-		url = '%s/api/bacnetd/start' %(self.base_url)
+		url = '%s/api/v1/service/bacnetd/' %(self.base_url)
 
 		#
 		# BACnet デバイス取得リクエスト送信
 		#
-		result = requests.get(url, params = {
-			'interface'	: interface
-		})
+		result = requests.post(url, json = {
+			'interface_name'	: interface_name,
+			'device_id'		: device_id
+		}).json()
 
 		#
 		# 結果の確認
 		#
-		if result.status_code == 200:
-			return True
+		if result['ok'] == True: return True
 		return False
 
 #
@@ -152,16 +152,16 @@ if __name__ == '__main__':
 	#
 	# BACnetd の 起動
 	#
-	client = BACnetdClient('localhost', '8888')
-	client.start(interface = 'en0')
+	client = BACnetdClient('localhost', '2018')
+	print client.start(interface_name = 'en1')
 
 	#
 	# BACnet 通信の実行
 	#
-	client = BACnetClient('localhost', '8888')
+	client = BACnetClient('localhost', '2018')
 
 	print client.scanDevices()
 
-	print client.bacepics(123)
-	print client.ReadPropertyRequest(123, 2, 6, 85)
+	#print client.bacepics(123)
+	#print client.ReadPropertyRequest(123, 2, 6, 85)
 

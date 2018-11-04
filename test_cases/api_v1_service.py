@@ -13,15 +13,16 @@ class Service(unittest.TestCase):
 		response = requests.post(
 			'%s/api/v1/service/bacnetd/' %(url),
 			json = {
-				'interface_name'	: 'eth0',
+				#'interface_name'	: 'eth0',
+				'interface_name'	: 'en1',
 				'device_id'		: 2018
 			}
 		)
-		print(response.content)
+		#print(response.content)
 		self.assertEqual(response.status_code, 200)
 
 	def test_stop_bacnetd(self):
 		response = requests.delete('%s/api/v1/service/bacnetd/' %(url))
-		print(response.content)
+		#print(response.content)
 		self.assertEqual(response.status_code, 200)
 

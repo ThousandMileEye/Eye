@@ -21,7 +21,7 @@ from eyed.db import SessionFactory
 #
 # BACnet Daemon Instance
 #
-from eyed.single import SingleBACnetd
+from eyed.single import SingleBACnetdService
 from property import EyedPresentValue
 
 #
@@ -31,7 +31,7 @@ def addBACnetObject(name, object_id, instance_id):
 	#
 	# BACnet コマンド操作用インスタンス取得
 	#
-	app = SingleBACnetd.getApplication()
+	app = SingleBACnetdService.getApplication()
 
 	#
 	# BACnet クライアント の 取得
@@ -58,7 +58,7 @@ def addBACnetProperty(name, object_id, instance_id, property_id, type, value):
 	#
 	# BACnet コマンド操作用インスタンス取得
 	#
-	app = SingleBACnetd.getApplication()
+	app = SingleBACnetdService.getApplication()
 
 	#
 	# BACnet クライアント の 取得

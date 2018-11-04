@@ -21,7 +21,10 @@ from eyed.db import SessionFactory
 #
 # BACnet Daemon Instance
 #
-from eyed.single import SingleBACnetd, DatastoreType
+from eyed.single import SingleBACnetService
+from eyed.single import SingleBACnetdService, DatastoreType
+from eyed.single.exception import BACnetdIsNotRunningException
+from eyed.single.exception import BACnetDeviceNotFoundException
 
 #
 # 初期化処理
@@ -37,52 +40,24 @@ class BACnetService(object):
 	#
 	def exposed_doWhoIsRequest(self, timeout = 10):
 		#
-		# BACnet コマンド操作用インスタンス取得
-		#
-		app = SingleBACnetd.getApplication()
-		if app == None:
-			raise Exception('BAcnetd is not running...')
-		bacnet = BACnetClient(app)
-
-		#
-		# WhoIsRequest の 送信
-		#
-		bacnet.WhoIsRequest()
-
-		#
 		# WhoIsRequest を 投げてから最初の IAmRequestを受け取るまで待つ
 		#
 		try:
-			device_id = app.responseQueue.get(timeout = timeout)
-			return { 'device_id' : device_id }
-		except Exception:
-			#
-			# タイムアウトを通知
-			#
-			return None
+			device = SingleBACnetService.doWhoIsRequest(timeout = 10)
+			return device
+		except BACnetdIsNotRunningException:
+			return Error('BACnetdIsNotRunningException')
+		except BACnetDeviceNotFoundException:
+			return Error('BACnetDeviceNotFoundException')
 
 	#
 	# デバイスマップの取得
 	#
 	def exposed_getDevices(self):
 		#
-		# BACnet コマンド操作用インスタンス取得
+		# BACnet デバイスの取得
 		#
-		app = SingleBACnetd.getApplication()
-		if app == None:
-			raise Exception('BAcnetd is not running...')
-		bacnet = BACnetClient(app)
-
-		#
-		# デバイスリストの作成
-		#
-		devices = []
-		for key, value in app.device_map.items():
-			devices.append({ 'device_id' : key, 'ip' : str(value) })
-
-		#
-		# デバイスリストを返却
-		#
+		devices = SingleBACnetService.getDevices()
 		return devices
 
 	#
@@ -92,7 +67,7 @@ class BACnetService(object):
 		#
 		# BACnet コマンド操作用インスタンス取得
 		#
-		app = SingleBACnetd.getApplication()
+		app = SingleBACnetdService.getApplication()
 		if app == None:
 			raise Exception('BAcnetd is not woring...')
 		bacnet = BACnetClient(app)
@@ -132,7 +107,7 @@ class BACnetService(object):
 		#
 		# BACnet コマンド操作用インスタンス取得
 		#
-		app = SingleBACnetd.getApplication()
+		app = SingleBACnetdService.getApplication()
 		if app == None:
 			raise Exception('BAcnetd is not woring...')
 
@@ -168,7 +143,7 @@ class BACnetService(object):
 		#
 		# BACnet コマンド操作用インスタンス取得
 		#
-		app = SingleBACnetd.getApplication()
+		app = SingleBACnetdService.getApplication()
 		if app == None:
 			raise Exception('BAcnetd is not woring...')
 		bacnet = BACnetClient(app)
@@ -185,7 +160,7 @@ class BACnetService(object):
 		#
 		# BACnet コマンド操作用インスタンス取得
 		#
-		app = SingleBACnetd.getApplication()
+		app = SingleBACnetdService.getApplication()
 		if app == None:
 			raise Exception('BAcnetd is not woring...')
 
@@ -227,7 +202,7 @@ class BACnetService(object):
 		#
 		# BACnet コマンド操作用インスタンス取得
 		#
-		app = SingleBACnetd.getApplication()
+		app = SingleBACnetdService.getApplication()
 		if app == None:
 			raise Exception('BAcnetd is not woring...')
 		bacnet = BACnetClient(app)
@@ -263,7 +238,7 @@ class BACnetService(object):
 			#
 			# Datastore の 取得
 			#
-			datastore = SingleBACnetd().getDatastore()
+			datastore = SingleBACnetdService().getDatastore()
 
 			#
 			# 値の設定
@@ -300,7 +275,7 @@ class BACnetService(object):
 		#
 		# BACnet コマンド操作用インスタンス取得
 		#
-		app = SingleBACnetd.getApplication()
+		app = SingleBACnetdService.getApplication()
 		if app == None:
 			raise Exception('BAcnetd is not woring...')
 		bacnet = BACnetClient(app)

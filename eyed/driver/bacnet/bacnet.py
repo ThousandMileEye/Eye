@@ -50,6 +50,19 @@ class BACnetClient:
 		# WhoIsRequest の 送信
 		#
 		self.application.who_is(low_limit, high_limit, GlobalBroadcast())
+		return True
+
+	#
+	# IamRequest の 受信待ち
+	# - 例外: Empty (タイムアウト時)
+	#
+	def receiveIamRequest(self, timeout):
+		#
+		# タイムアウト秒の間受信待ち
+		#
+		device_queue = self.application.getDeviceQueue()
+		device_id = device_queue.get(timeout = timeout)
+		return { 'device_id' : device_id }
 
 	#
 	# ReadProperty

@@ -15,7 +15,7 @@ from eyed.api.common.response import OK, Error
 #
 # BACnet デーモン管理用
 #
-from eyed.single import SingleBACnetd
+from eyed.single import SingleBACnetdService
 
 #
 # 実体の操作
@@ -34,7 +34,7 @@ class BACnetdController:
 	@view_config(request_method = 'GET')
 	def get(self):
 		return OK({
-			'alive' : SingleBACnetd.isAlive()
+			'alive' : SingleBACnetdService.isAlive()
 		})
 
 	#
@@ -88,13 +88,13 @@ class BACnetdController:
 		#
 		# BACnetd の 起動状態確認
 		#
-		if SingleBACnetd.isAlive() == True:
+		if SingleBACnetdService.isAlive() == True:
 			return Error('BACnetd is already running...')
 
 		#
 		# BACnetd の 起動
 		#
-		if SingleBACnetd.start(interface_name, device_id) == False:
+		if SingleBACnetdService.start(interface_name, device_id) == False:
 			return Error('Failed to start Bacnetd...')
 		return OK()
 
@@ -106,13 +106,13 @@ class BACnetdController:
 		#
 		# BACnetd の 起動状態確認
 		#
-		if SingleBACnetd.isAlive() == False:
+		if SingleBACnetdService.isAlive() == False:
 			return Error('BACnetd is not running...')
 
 		#
 		# BACnetd の 停止
 		#
-		if SingleBACnetd.stop() == False:
+		if SingleBACnetdService.stop() == False:
 			return Error('Failed to stop Bacnetd...')
 		return OK()
 

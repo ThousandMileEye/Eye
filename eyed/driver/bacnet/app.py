@@ -76,9 +76,14 @@ class App(BIPSimpleApplication, ReadWritePropertyMultipleServices):
 		BIPSimpleApplication.indication(self, apdu)
 
 	#
-	# Device の 取得
+	# デバイスマップ取得用
 	#
-	def getDevice(self, timeout):
-		device_id = app._device_queue.get(timeout = timeout)
-		return { 'device_id' : device_id }
+	def getDeviceMap(self):
+		return self._device_map
+
+	#
+	# デバイスキュー取得用
+	#
+	def getDeviceQueue(self):
+		return self._device_queue
 

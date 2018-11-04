@@ -17,7 +17,7 @@ from eyed.driver.bacnet import BACnetClient
 #
 # Single Instances
 #
-from eyed.single import SingleBACnetd
+from eyed.single import SingleBACnetdService
 
 #
 # SchedulerService
@@ -91,7 +91,7 @@ class SchedulerService(object):
 			#
 			# BACnet コマンド操作用インスタンス取得
 			#
-			app = SingleBACnetd.getApplication()
+			app = SingleBACnetdService.getApplication()
 			if app == None: return False
 			bacnet = BACnetClient(app)
 
