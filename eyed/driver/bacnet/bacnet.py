@@ -200,12 +200,6 @@ class BACnetClient:
 	#
 	def addObject(self, name, object_id, instance_id):
 		#
-		# BACnetd の 動作確認
-		#
-		if self.application == None:
-			raise Exception('BACnetd is not running...')
-
-		#
 		# オブジェクト識別子の取得
 		#
 		objectIdentifier = self.getObjectIdentifier(object_id, instance_id)
@@ -235,12 +229,6 @@ class BACnetClient:
 	# addProperty (プロパティ の 登録)
 	#
 	def addProperty(self, name, property_instance):
-		#
-		# BACnetd の 動作確認
-		#
-		if self.application == None:
-			raise Exception('BACnetd is not running...')
-
 		#
 		# オブジェクトを名前から検索
 		#
@@ -282,12 +270,6 @@ class BACnetClient:
 	#
 	def getObjectByID(self, objectIdentifier, instance_id):
 		#
-		# BACnetd の 動作確認
-		#
-		if self.application == None:
-			raise Exception('BACnetd is not running...')
-
-		#
 		# 登録されているオブジェクトの検索
 		#
 		return self.application.get_object_id((objectIdentifier, instance_id))
@@ -296,12 +278,6 @@ class BACnetClient:
 	# getObjectByName (オブジェクト の 取得 [名前で検索])
 	#
 	def getObjectByName(self, name):
-		#
-		# BACnetd の 動作確認
-		#
-		if self.application == None:
-			raise Exception('BACnetd is not running...')
-
 		#
 		# オブジェクトを名前から検索
 		#
