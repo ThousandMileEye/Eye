@@ -11,6 +11,7 @@ import rpcd
 import httpd
 import client
 import driver
+import scheduler
 
 __all__ = [
 	logger,
@@ -21,6 +22,7 @@ __all__ = [
 	rpc,
 	rpcd,
 	httpd,
-	client
+	client,
+	scheduler
 ]
 
