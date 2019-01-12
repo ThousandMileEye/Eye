@@ -70,24 +70,23 @@ class BACnetDeviceController:
 		#
 		# 書式チェックの実施
 		#
-		#try:
-		#	jsonschema.validate(self.request.json_body, schema)
+		try:
+			jsonschema.validate(self.request.json_body, schema)
 		#
 		# JSON内のデータ書式に問題がある場合
 		#
-		#except jsonschema.ValidationError as e:
-		#	return Error(e.message)
+		except jsonschema.ValidationError as e:
+			return Error(e.message)
 		#
 		# JSONの書式に問題がある場合
 		#
-		#except ValueError:
-		#	return Error('JSON Syntax error...')
+		except ValueError:
+			return Error('JSON Syntax error...')
 
 		#
 		# タイムアウトの取得
 		#
 		timeout = self.request.json_body['timeout']
-		print timeout
 
 		#
 		# WhoIsRequest の 送信
