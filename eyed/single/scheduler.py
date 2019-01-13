@@ -10,22 +10,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.base import STATE_RUNNING
 
 #
-# Database 接続用
-#
-from eyed.model import TaskGroup, BACnetMeasuredValue
-from eyed.db import SessionFactory
-
-#
-# BACnet Driver
-#
-from eyed.driver.bacnet import BACnetClient
-
-#
-# Single Instances
-#
-from eyed.single import SingleBACnetdService, DatastoreType
-
-#
 # SingleScheduler
 #
 class SingleScheduler:
@@ -64,6 +48,22 @@ class SingleScheduler:
 		if cls._instance is None:
 			cls._instance = cls()
 		return cls._instance
+
+	#
+	# addIntervalTask
+	#
+	def addIntervalTask(self, name, interval, callback, args):
+		#
+		# 定期実行ジョブの追加
+		#
+		self.scheduler.add_job(
+			callback,
+			'interval',
+			args,
+			name		= name,
+			seconds		= interval,
+			max_instances	= 1
+		)
 
 	#
 	# addTaskGroup
