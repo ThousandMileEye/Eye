@@ -35,11 +35,6 @@ class SingleScheduler:
 			'apscheduler.timezone'				: 'UTC',
 		})
 
-		#
-		# スケジューラの開始
-		#
-		self.scheduler.start()
-
 	#
 	# get instance
 	#
@@ -50,26 +45,59 @@ class SingleScheduler:
 		return cls._instance
 
 	#
+	# start
+	#
+	def start(self):
+		#
+		# スケジューラの開始
+		#
+		return self.scheduler.start()
+
+	#
 	# addIntervalTask
 	#
-	def addIntervalTask(self, name, interval, callback, args):
+	def addIntervalTask(self, monitoring_id, interval, callback, args):
 		#
 		# 定期実行ジョブの追加
 		#
-		self.scheduler.add_job(
+		return self.scheduler.add_job(
 			callback,
 			'interval',
 			args,
-			name		= name,
+			id		= monitoring_id,
 			seconds		= interval,
 			max_instances	= 1
 		)
 
 	#
+	# getIntervalTaskByID
+	#
+	def getIntervalTaskByID(self, monitoring_id):
+		#
+		# ジョブの検索
+		#
+		return self.scheduler.get_job(monitoring_id)
+
+	#
+	# deleteIntervalTaskByID
+	#
+	def deleteIntervalTaskByID(self, monitoring_id):
+		#
+		# ジョブの検索
+		#
+		return self.scheduler.remove_job(monitoring_id)
+
+#
+# getAllIntervalTask
+#
+def getAllIntervalTask(self):
+        return self.scheduler.get_jobs()
+
+	#
 	# addTaskGroup
 	#
 	def addTaskGroup(self, name, interval):
-		from eyed.scheduler.job.bacnet import job_bacnet
+		from eyed.monitoring.bacnet import job_bacnet
 
 		#
 		# 定期実行ジョブの追加

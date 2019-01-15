@@ -8,6 +8,7 @@ import subprocess
 #
 from eyed.rpc.system import SystemService
 from eyed.rpc.bacnet import BACnetService, start_bacnet_emulation
+from eyed.single import SingleScheduler
 from eyed.single import SingleBACnetService
 from eyed.single import SingleBACnetdService
 from eyed.rpc.scheduler import SchedulerService, start_scheduler
@@ -37,6 +38,19 @@ def start():
 	#
 	SingleBACnetdService.start(None, None)
 	SingleBACnetService.reload()
+
+	#
+	# スケジューラの起動
+	#
+	single = SingleScheduler.getInstance()
+	single.start()
+
+	#
+	# 監視の設定(HTTPタスク自動起動)
+	#
+	from monitoring.http import HTTPMonitoringScheduler
+	HTTPMonitoringScheduler.reload()
+
 	#start_bacnet_emulation()
 	#start_scheduler()
 

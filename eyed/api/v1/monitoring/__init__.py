@@ -9,7 +9,8 @@ def bootstrap(config):
 	#
 	# Scan controller
 	#
-	config.add_route('api::v1:monitoring:http', '/http/')
+	config.add_route('api::v1:monitoring:http:rest', '/http/')
+	config.add_route('api::v1:monitoring:http:rest-id', '/http/{id}')
         config.include(http.bootstrap)
 
 #

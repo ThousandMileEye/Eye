@@ -6,6 +6,7 @@ from simulation import BACnetSimulationObject, BACnetSimulationProperty
 from log import BACnetSimulationLog
 from proxy import ProxyPoint
 from scheduler import TaskGroup, BACnetTask, BACnetMeasuredValue
+from monitoring import HTTPMonitoringConfiguration, HTTPMeasurementValue
 
 __all__ = [
 	BaseObject,
@@ -16,6 +17,7 @@ __all__ = [
 	ProxyPoint,
 	TaskGroup,
 	BACnetTask,
-	BACnetMeasuredValue
+	BACnetMeasuredValue,
+	HTTPMonitoringConfiguration, HTTPMeasurementValue
 ]
 
