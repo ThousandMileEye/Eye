@@ -10,7 +10,9 @@ def OK(value = None):
 	return HTTPOk(json_body = {
 		'ok' 	: True,
 		'data'	: value,
-	})
+	}, headers = [{
+		'Access-Control-Allow-Origin', '*'
+	}])
 
 #
 # リクエスト失敗時の処理
@@ -21,5 +23,7 @@ def Error(message):
 		'error'		: {
 			'message' : message
 		}
-	})
+	}, headers = [{
+		'Access-Control-Allow-Origin', '*'
+	}])
 

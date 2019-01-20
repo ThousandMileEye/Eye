@@ -4,7 +4,6 @@ import os, subprocess
 from pyramid.config import Configurator
 from waitress import serve
 from eyed.boot import boot
-from eyed.api.common.cors import request_factory
 
 #
 # デーモンの起動
@@ -14,11 +13,6 @@ def start_httpd(host = '0.0.0.0', port = 2018):
 	# WEB アプリケーションの設定
 	#
 	config = Configurator()
-
-	#
-	# Access Controll Allow Origin の 設定
-	#
-	config.set_request_factory(request_factory)
 
 	#
 	# API V1 SYSTEM の 読み込み
