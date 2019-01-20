@@ -4,6 +4,7 @@ import os, subprocess
 from pyramid.config import Configurator
 from waitress import serve
 from eyed.boot import boot
+from eyed.api.common.cors import request_factory
 
 #
 # デーモンの起動
@@ -13,6 +14,11 @@ def start_httpd(host = '0.0.0.0', port = 2018):
 	# WEB アプリケーションの設定
 	#
 	config = Configurator()
+
+	#
+	# Access Controll Allow Origin の 設定
+	#
+	config.set_request_factory(request_factory)
 
 	#
 	# API V1 SYSTEM の 読み込み
@@ -31,29 +37,6 @@ def start_httpd(host = '0.0.0.0', port = 2018):
 	#
 	import api.v1.monitoring
 	config.include(api.v1.monitoring.bootstrap, route_prefix='api/v1/monitoring/')
-
-	#
-	# HTTPDサーバの設定
-	#
-	app = config.make_wsgi_app()
-	serve(app, host=host, port=port)
-
-#
-# Main
-#
-if __name__ == '__main__':
-        #
-        # ログレベルの設定
-        #
-        import logging
-        from eyed import logger
-        logger.addHandler(logging.StreamHandler())
-        logging.basicConfig(level=logging.DEBUG)
-
-	boot.doAlembicUpgradeHead()
-	boot.start()
-	start_httpd()
-
 
 	#
 	# HTTPDサーバの設定
